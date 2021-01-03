@@ -13,5 +13,6 @@ class Tasks extends Model
         'user_name',
         'task_name',
         'task_type',
+        'user_id',
     ];
 }

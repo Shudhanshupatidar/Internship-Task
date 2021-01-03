@@ -14,8 +14,5 @@ class Users extends Model
         'mobile',
     ];
 
-    public function task()
-    {
-        return $this->hasOne('App\Models\Tasks');
-    }
+     
 }

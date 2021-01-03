@@ -17,19 +17,29 @@
 <body class="bg-light">
 
     <div class="container">
-        <div class="row">
+        <div class="row mt-5">
+
+            @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+            @endif
+
             <div class="col-lg-6 mx-auto border mt-5 bg-white" style="border-radius: 50px;">
+                <a class="mt-3 px-2 btn btn-outline-dark rounded-pill" style="float:right" href="/">Add New User</a> <br>
+
 
                 <form method='post' action="/submit-task" class="my-5">
                     @csrf
 
-                   
+
+                    <h3 class="text-center my-4">Assign Task</h3>
                     <div class="px-4 mb-3">
                         <label class="form-label">Name</label>
                         <select class="form-control" required name="name">
                             <option value="" hidden>Select user</option>
                             @foreach($user_data as $user)
-                            <option value="{{ $user }}">{{ $user }}</option>
+                            <option value="{{ $user->id }},{{ $user->name }}">{{ $user->name }}</option>
                             @endforeach
                         </select>
                     </div>

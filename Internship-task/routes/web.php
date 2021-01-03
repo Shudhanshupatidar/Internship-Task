@@ -28,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get('/tasks', function () {
-    $user_data = Users::pluck('name')->all();
+    $user_data = Users::all();
     //dd($user_data);
     return view('task',compact('user_data'));
 

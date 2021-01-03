@@ -2,29 +2,31 @@
 
 namespace App\Exports;
 
-use App\Models\Users;
-use App\Post;
-use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class DataQueryExport implements FromQuery, WithHeadings
+use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+
+class DataQueryExport implements FromArray, WithMultipleSheets
 {
-    use Exportable;
+    protected $sheets;
 
-
-    public function query()
+    public function __construct($sheets)
     {
-        return Users::query()->select('id', 'name', 'email', 'mobile');
+        $this->sheets = $sheets;
     }
 
-    public function headings() : array
+    public function array(): array
     {
-        return [
-            'Id',
-            'Name',
-            'Email',
-            'Mobile',
+        return $this->sheets;
+    }
+
+    public function sheets(): array
+    {
+        $sheets = [
+            new UsersExport($this->sheets['User']),
+            new TaskExport($this->sheets['Tasks']),
         ];
+
+        return $sheets;
     }
 }

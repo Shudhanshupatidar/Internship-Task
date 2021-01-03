@@ -23,6 +23,6 @@ class UserController extends Controller
                 ]
                 );    
                 
-                return redirect()->back();         
+                return redirect()->back()->with('message', 'User Added !!');         
     }
 }

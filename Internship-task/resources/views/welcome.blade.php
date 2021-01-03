@@ -17,11 +17,22 @@
 <body class="bg-light">
 
     <div class="container">
-        <div class="row">
+        <div class="row mt-3">
+
+            @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+            @endif
+
             <div class="col-lg-6 mx-auto border mt-5 bg-white" style="border-radius: 50px;">
+                <a class="mt-3 px-2 mx-2 btn btn-outline-success rounded-pill" style="float:right" href="/export">Export All Data</a>
+                <a class="mt-3 px-2 btn btn-outline-dark rounded-pill" style="float:right" href="/tasks">Assign Task</a> <br>
 
                 <form method='post' action="/submit" class="my-5">
                     @csrf
+
+                    <h3 class="text-center my-4">Add new user</h3>
                     <div class="mb-3 px-4">
                         <label class="form-label">Name</label>
                         <input type="text" name="name" class="form-control" placeholder="Shudhanshu Patidar">
